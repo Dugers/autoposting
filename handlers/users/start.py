@@ -4,7 +4,7 @@ from keyboards.default import main_menu_keyboard
 from aiogram.types import Message
 
 
-@dp.message_handlers(OnlyAdminFilter(reverse=True))
+@dp.message_handler(OnlyAdminFilter(reverse=True))
 async def not_admin_message(message: Message):
     await message.answer("У вас недостаточно прав для выполнения этой команды")
 
