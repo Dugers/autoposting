@@ -9,7 +9,6 @@ from utils.autoposting import schedule
 
 
 async def on_startup(dp):
-    print(WEBHOOK_PATH, WEBHOOK_URL, WEBAPP_HOST, WEBAPP_PORT)
     await create_tables()
     setup_filters(dp)
     for admin in ADMINS_IDS:
@@ -18,7 +17,6 @@ async def on_startup(dp):
     await bot.set_webhook(WEBHOOK_URL)
 
 if __name__ == '__main__':
-    # executor.start_polling(dp, on_startup=on_startup)
     executor.start_webhook(
         dispatcher=dp,
         webhook_path=WEBHOOK_PATH,
