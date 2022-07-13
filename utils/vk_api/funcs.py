@@ -1,5 +1,5 @@
 from aiohttp import ClientSession
-import youtube_dl
+import asyncio
 from data import VK_TOKEN
 
 
@@ -26,6 +26,7 @@ async def parse_posts(group_name):
                 if data_type == "photo":
                     photo_url = data['photo']['sizes'][-1]['url']
                     content.append([post['id'], data['photo']['id'] , "photo", photo_url])
+            await asyncio.sleep(1)
         except:
             continue
     return content
