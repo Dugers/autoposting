@@ -15,13 +15,14 @@ async def parse_posts(group_name):
             for data in data_list:
                 data_type = data['type']
                 if data_type == "video":
-                    async with ClientSession() as session:
-                        async with session.get(f"https://api.vk.com/method/video.get?videos={data['video']['owner_id']}_{data['video']['id']}&access_token={VK_TOKEN}&v=5.131") as video_url:
-                            video_url = await video_url.json()
-                            video_url = video_url['response']['items'][0]['player']
-                            with youtube_dl.YoutubeDL(params={'outtmpl': f"video/{post['id']}_{data['video']['id']}.mp4"}) as ydl:
-                                ydl.download([video_url])
-                                content.append([post['id'], data['video']['id'] ,'video', f"video/{post['id']}_{data['video']['id']}.mp4"])
+                    # async with ClientSession() as session:
+                    #     async with session.get(f"https://api.vk.com/method/video.get?videos={data['video']['owner_id']}_{data['video']['id']}&access_token={VK_TOKEN}&v=5.131") as video_url:
+                    #         video_url = await video_url.json()
+                    #         video_url = video_url['response']['items'][0]['player']
+                    #         with youtube_dl.YoutubeDL(params={'outtmpl': f"video/{post['id']}_{data['video']['id']}.mp4"}) as ydl:
+                    #             ydl.download([video_url])
+                    #             content.append([post['id'], data['video']['id'] ,'video', f"video/{post['id']}_{data['video']['id']}.mp4"])
+                    continue
                 if data_type == "photo":
                     photo_url = data['photo']['sizes'][-1]['url']
                     content.append([post['id'], data['photo']['id'] , "photo", photo_url])
