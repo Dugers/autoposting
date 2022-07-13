@@ -14,14 +14,15 @@ async def on_startup(dp):
     for admin in ADMINS_IDS:
         await bot.send_message(admin, "Bot started working")
     asyncio.create_task(schedule())
-    await bot.set_webhook(WEBHOOK_URL)
+    # await bot.set_webhook(WEBHOOK_URL)
 
 if __name__ == '__main__':
-    executor.start_webhook(
-        dispatcher=dp,
-        webhook_path=WEBHOOK_PATH,
-        on_startup=on_startup,
-        skip_updates=True,
-        host=WEBAPP_HOST,
-        port=WEBAPP_PORT,
-    )
+    executor.start_polling(dp, on_startup=on_startup)
+    # executor.start_webhook(
+    #     dispatcher=dp,
+    #     webhook_path=WEBHOOK_PATH,
+    #     on_startup=on_startup,
+    #     skip_updates=True,
+    #     host=WEBAPP_HOST,
+    #     port=WEBAPP_PORT,
+    # )
