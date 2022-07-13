@@ -20,9 +20,6 @@ async def parse_posts(group_name):
                             video_url = await video_url.json()
                             video_url = video_url['response']['items'][0]['player']
                             with youtube_dl.YoutubeDL(params={'outtmpl': f"video/{post['id']}_{data['video']['id']}.mp4"}) as ydl:
-                                video_duration = ydl.extract_info(video_url, download=False)['duration']
-                                if video_duration > 60:
-                                    continue
                                 ydl.download([video_url])
                                 content.append([post['id'], data['video']['id'] ,'video', f"video/{post['id']}_{data['video']['id']}.mp4"])
                 if data_type == "photo":
